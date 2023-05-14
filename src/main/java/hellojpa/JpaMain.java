@@ -15,6 +15,21 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Team team = new Team();
+            team.setName("TeamA");
+//            team.getMembers().add(member);
+            em.persist(team);
+
+            //저장
+            Member member = new Member();
+            member.setUsername("member1");
+            member.changeTeam(team);
+            em.persist(member);
+
+
+            em.flush();
+            em.clear();
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
